@@ -6,7 +6,7 @@ const swaggerUi = require("swagger-ui-express");
 const PORT = 8080;
 
 const swaggerOptions = {
-    definition: {
+  definition: {
     info: {
       title: "My Rest Api",
       description: "This is my first swagger api",
@@ -28,11 +28,27 @@ app.listen(PORT, () =>
   console.log(`App is Alive on: http://localhost:${PORT}/`)
 );
 
-app.get("/tshirt", (req, res) => {
-  res.status(200).send({
-    tshirt: "👕",
-    size: "large",
-  });
+/**
+ * @swagger
+ * /tshirts:
+ *  get:
+ *      description: Use to request all tshirts
+ *      responses:
+ *          '200':
+ *              description: A successfull response
+ *
+ */
+app.get("/tshirts", (req, res) => {
+  res.status(200).send([
+    {
+      tshirt: "👕",
+      size: "large",
+    },
+    {
+      tshirt: "🔥",
+      size: "small",
+    },
+  ]);
 });
 
 app.post("/tshirt/:id", (req, res) => {
